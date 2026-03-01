@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>家长端 - 赫动体育</title>
+<style>
+*{box-sizing:border-box;font-family:PingFang SC,Microsoft YaHei,sans-serif}
+body{margin:0;background:#f5f7fa;color:#333}
+.header{background:#2c3e50;color:#fff;padding:20px;text-align:center}
+.back{background:#34495e;color:#fff;padding:10px 14px;border:none;border-radius:8px;margin:10px}
+.card{background:#fff;border-radius:16px;padding:22px;margin:16px;box-shadow:0 4px 12px rgba(0,0,0,0.06)}
+.title{font-size:17px;font-weight:bold;margin-bottom:14px}
+input{width:100%;padding:12px;border-radius:10px;border:1px solid #e6e8eb;margin-bottom:10px}
+button{width:100%;padding:12px;background:#1abc9c;color:#fff;border:none;border-radius:10px}
+.item{display:flex;justify-content:space-between;padding:11px 0;border-bottom:1px solid #f4f5f7}
+.c0{color:#999}
+.c1{color:#f39800}
+.c2{color:#0099ff}
+.c3{color:#07c160}
+.c4{color:#00c800}
+.progress{height:10px;background:#f1f1f1;border-radius:5px;margin:10px 0}
+.bar{height:10px;background:#1abc9c;width:0;border-radius:5px}
+</style>
+</head>
+<body>
+<div class="header">家长端 · 学员成绩查询</div>
+<button class="back" onclick="location.href='index.html'">← 返回首页</button>
+
+<div class="card">
+<div class="title">输入学员姓名查询</div>
+<input id="p_name" placeholder="学员姓名" value="丁同学">
+<button onclick="search()">查询</button>
+</div>
+
+<div class="card" id="result" style="display:none">
+<div class="title">跑酷达级进度</div>
+<div id="info"></div>
+<div>综合成长进度</div>
+<div class="progress"><div class="bar" id="p_bar"></div></div>
+<div style="font-size:14px;color:#666" id="p_text"></div>
+<div id="list" style="margin-top:20px"></div>
+</div>
+
+<script>
+const levelScore={"未掌握":0,"初步掌握":1,"基本熟练":2,"非常熟练":3,"完美精通":4};
+const colorCls={"未掌握":"c0","初步掌握":"c1","基本熟练":"c2","非常熟练":"c3","完美精通":"c4"};
+const actions=[
+"猫爬","精准跳","落地缓冲","基本落地","侧滚翻",
+"蹬墙上墙","金刚跳","猫扑","侧跃","转体",
+"懒人跳","屁蹲跳","猩猩跳","反身跳","定点跳",
+"前空翻基础","后空翻基础","侧空翻基础","转体180","远空翻",
+"双金刚","连续上墙","连贯线路","空翻衔接","转体360"
+];
+
+function search(){
+const name=document.getElementById("p_name").value.trim();
+const students=JSON.parse(localStorage.getItem("stuData"))||[];
+const s=students.find(x=>x.name==name);
+if(!s)return alert("未找到");
+
+let total=0;
+let max=actions.length*4;
+let html="";
+actions.forEach((act,k)=>{
+const v=s["p"+(k+1)];
+total+=levelScore[v];
+html+=`<div class="item"><span>${act}</span><span class="${colorCls[v]}">${v}</span></div>`;
+});
+
+const per=Math.round(total/max*100);
+document.getElementById("p_bar").style.width=per+"%";
+document.getElementById("p_text").innerText=`综合成长度 ${per}%`;
+document.getElementById("info").innerHTML=`<div class="item"><span>学员</span><span>${s.name}</span></div>`;
+document.getElementById("list").innerHTML=html;
+document.getElementById("result").style.display="block";
+}
+</script>
+</body>
+</html>

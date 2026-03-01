@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>教练端 - 赫动体育</title>
+<style>
+*{box-sizing:border-box;font-family:PingFang SC,Microsoft YaHei,sans-serif}
+body{margin:0;background:#f5f7fa;color:#333;padding-bottom:40px}
+.header{background:#2c3e50;color:#fff;padding:20px;text-align:center}
+.back{background:#34495e;color:#fff;padding:10px 14px;border:none;border-radius:8px;margin:10px}
+.card{background:#fff;border-radius:16px;padding:22px;margin:16px;box-shadow:0 4px 12px rgba(0,0,0,0.06)}
+.title{font-size:17px;font-weight:bold;margin-bottom:14px}
+input,select{width:100%;padding:12px;border-radius:10px;border:1px solid #e6e8eb;margin-bottom:10px}
+button{width:100%;padding:12px;background:#1abc9c;color:#fff;border:none;border-radius:10px;margin-top:4px}
+.item{padding:11px;border-bottom:1px solid #f4f5f7}
+.level-group{margin:14px 0 8px;font-size:14px;color:#666}
+</style>
+</head>
+<body>
+<div class="header">教练端 · 跑酷达级管理</div>
+<button class="back" onclick="location.href='index.html'">← 返回首页</button>
+
+<div class="card">
+<div class="title">新增学员</div>
+<input id="add_name" placeholder="学员姓名">
+<input id="add_age" placeholder="年龄">
+<button onclick="addStu()">新增学员</button>
+</div>
+
+<div class="card">
+<div class="title">学员列表（点击编辑）</div>
+<div id="stu_list"></div>
+</div>
+
+<div class="card" id="edit_area" style="display:none">
+<div class="title" id="edit_title"></div>
+
+<div class="level-group">Lv1 基础动作</div>
+<select class="s">
+<option>未掌握</option><option>初步掌握</option><option>基本熟练</option><option>非常熟练</option><option>完美精通</option>
+</select>猫爬
+<select class="s">
+<option>未掌握</option><option>初步掌握</option><option>基本熟练</option><option>非常熟练</option><option>完美精通</option>
+</select>精准跳
+<select class="s">
+<option>未掌握</option><option>初步掌握</option><option>基本熟练</option><option>非常熟练</option><option>完美精通</option>
+</select>落地缓冲
+<select class="s">
+<option>未掌握</option><option>初步掌握</option><option>基本熟练</option><option>非常熟练</option><option>完美精通</option>
+</select>基本落地
+<select class="s">
+<option>未掌握</option><option>初步掌握</option><option>基本熟练</option><option>非常熟练</option><option>完美精通</option>
+</select>侧滚翻
+
+<div class="level-group">Lv2 进阶动作</div>
+<select class="s">
+<option>未掌握</option><option>初步掌握</option><option>基本熟练</option><option>非常熟练</option><option>完美精通</option>
+</select>蹬墙上墙
+<select class="s">
+<option>未掌握</option><option>初步掌握</option><option>基本熟练</option><option>非常熟练</option><option>完美精通</option>
+</select>金刚跳
+<select class="s">
+<option>未掌握</option><option>初步掌握</option><option>基本熟练</option><option>非常熟练</option><option>完美精通</option>
+</select>猫扑
+<select class="s">
+<option>未掌握</option><option>初步掌握</option><option>基本熟练</option><option>非常熟练</option><option>完美精通</option>
+</select>侧跃
+<select class="s">
+<option>未掌握</option><option>初步掌握</option><option>基本熟练</option><option>非常熟练</option><option>完美精通</option>
+</select>转体
+
+<div class="level-group">Lv3 技巧动作</div>
+<select class="s">
+<option>未掌握</option><option>初步掌握</option><option>基本熟练</option><option>非常熟练</option><option>完美精通</option>
+</select>懒人跳
+<select class="s">
+<option>未掌握</option><option>初步掌握</option><option>基本熟练</option><option>非常熟练</option><option>完美精通</option>
+</select>屁蹲跳
+<select class="s">
+<option>未掌握</option><option>初步掌握</option><option>基本熟练</option><option>非常熟练</option><option>完美精通</option>
+</select>猩猩跳
+<select class="s">
+<option>未掌握</option><option>初步掌握</option><option>基本熟练</option><option>非常熟练</option><option>完美精通</option>
+</select>反身跳
+<select class="s">
+<option>未掌握</option><option>初步掌握</option><option>基本熟练</option><option>非常熟练</option><option>完美精通</option>
+</select>定点跳
+
+<div class="level-group">Lv4 腾空动作</div>
+<select class="s">
+<option>未掌握</option><option>初步掌握</option><option>基本熟练</option><option>非常熟练</option><option>完美精通</option>
+</select>前空翻基础
+<select class="s">
+<option>未掌握</option><option>初步掌握</option><option>基本熟练</option><option>非常熟练</option><option>完美精通</option>
+</select>后空翻基础
+<select class="s">
+<option>未掌握</option><option>初步掌握</option><option>基本熟练</option><option>非常熟练</option><option>完美精通</option>
+</select>侧空翻基础
+<select class="s">
+<option>未掌握</option><option>初步掌握</option><option>基本熟练</option><option>非常熟练</option><option>完美精通</option>
+</select>转体180
+<select class="s">
+<option>未掌握</option><option>初步掌握</option><option>基本熟练</option><option>非常熟练</option><option>完美精通</option>
+</select>远空翻
+
+<div class="level-group">Lv5 专业动作</div>
+<select class="s">
+<option>未掌握</option><option>初步掌握</option><option>基本熟练</option><option>非常熟练</option><option>完美精通</option>
+</select>双金刚
+<select class="s">
+<option>未掌握</option><option>初步掌握</option><option>基本熟练</option><option>非常熟练</option><option>完美精通</option>
+</select>连续上墙
+<select class="s">
+<option>未掌握</option><option>初步掌握</option><option>基本熟练</option><option>非常熟练</option><option>完美精通</option>
+</select>连贯线路
+<select class="s">
+<option>未掌握</option><option>初步掌握</option><option>基本熟练</option><option>非常熟练</option><option>完美精通</option>
+</select>空翻衔接
+<select class="s">
+<option>未掌握</option><option>初步掌握</option><option>基本熟练</option><option>非常熟练</option><option>完美精通</option>
+</select>转体360
+
+<button onclick="saveEdit()">保存全部评价</button>
+</div>
+
+<script>
+const actions = [
+"猫爬","精准跳","落地缓冲","基本落地","侧滚翻",
+"蹬墙上墙","金刚跳","猫扑","侧跃","转体",
+"懒人跳","屁蹲跳","猩猩跳","反身跳","定点跳",
+"前空翻基础","后空翻基础","侧空翻基础","转体180","远空翻",
+"双金刚","连续上墙","连贯线路","空翻衔接","转体360"
+];
+
+let students = JSON.parse(localStorage.getItem("stuData")) || [];
+let editIdx = -1;
+
+function renderList(){
+let h="";
+students.forEach((s,i)=>{
+h+=`<div class="item" onclick="edit(${i})">${s.name}</div>`;
+});
+document.getElementById("stu_list").innerHTML=h;
+}
+
+function addStu(){
+const name=document.getElementById("add_name").value.trim();
+if(!name)return alert("请输入姓名");
+let stu={name,age:document.getElementById("add_age").value};
+actions.forEach((_,k)=>stu["p"+(k+1)]="未掌握");
+students.push(stu);
+saveData();
+renderList();
+alert("新增成功");
+}
+
+function edit(i){
+editIdx=i;
+const s=students[i];
+document.getElementById("edit_title").innerText="编辑："+s.name;
+document.querySelectorAll(".s").forEach((el,k)=>{
+el.value=s["p"+(k+1)];
+});
+document.getElementById("edit_area").style.display="block";
+}
+
+function saveEdit(){
+const s=students[editIdx];
+document.querySelectorAll(".s").forEach((el,k)=>{
+s["p"+(k+1)]=el.value;
+});
+saveData();
+alert("保存成功");
+}
+
+function saveData(){
+localStorage.setItem("stuData",JSON.stringify(students));
+}
+
+renderList();
+</script>
+</body>
+</html>
